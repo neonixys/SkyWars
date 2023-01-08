@@ -4,7 +4,7 @@ services:
   app:
     image: alex85doronin/skywars:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
-      - 80:80
+      - 8080:25000
     environment:
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
