@@ -82,7 +82,7 @@ class Equipment:
         """
         Метод загружает json в переменную EquipmentData
         """
-        my_absolute_path = './data/equipment.json'
+        my_absolute_path = "./data/equipment.json"
         with open(my_absolute_path, 'r', encoding='utf-8') as file:
 
             data = json.load(file)
