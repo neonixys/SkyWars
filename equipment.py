@@ -78,13 +78,17 @@ class Equipment:
 
     @staticmethod
     def _get_equipment_data() -> EquipmentData:
+
         """
         Метод загружает json в переменную EquipmentData
         """
-        with open("./data/equipment.json") as file:
+        my_absolute_path = r'/Users/alexeydoronin/Yandex.Disk.localized/SkyPro/PycharmProjects/SkyWars/data/equipment.json'
+        with open(my_absolute_path, 'r', encoding='utf-8') as file:
+
             data = json.load(file)
             equipment_schema = marshmallow_dataclass.class_schema(EquipmentData)
             try:
                 return equipment_schema().load(data)
             except marshmallow.exceptions.ValidationError:
                 raise ValueError
+

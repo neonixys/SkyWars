@@ -1,11 +1,22 @@
-from flask import Flask, render_template, request, url_for, redirect
+import os
 
-from base import Arena
+from flask import Flask, render_template, request, url_for, redirect, jsonify
+
+from bases import Arena
 from classes import unit_classes
 from equipment import Equipment
+from setup_db import db
 from unit import PlayerUnit, EnemyUnit
 
+DB_NAME = os.getenv('DB_NAME')
+DB_USER = os.getenv('DB_USER')
+DB_PASSWORD = os.getenv('DB_PASSWORD')
+DB_HOST = os.getenv('DB_HOST')
+
 app = Flask(__name__)
+app.config["JSON_AS_ASCII"] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 heroes = {
     "player": ...,
@@ -149,6 +160,23 @@ def choose_enemy():
         heroes['enemy'] = enemy
         return redirect(url_for('start_fight'))
 
+
+@app.route("/test_db/")
+def test_db():
+    result = db.session.execute(
+        '''
+        SELECT 1
+        '''
+    ).scalar()
+
+    return jsonify(
+        {
+            'result': result,
+        }
+    )
+
+
+db.init_app(app)
 
 if __name__ == "__main__":
     app.run(port=25000)
