@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: neonixys/skywars:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+    image: alex85doronin/skywars:$GITHUB_REF_NAME-$GITHUB_RUN_ID
     ports:
       - 80:80
     environment:
