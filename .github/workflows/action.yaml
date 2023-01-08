@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.SERVER_USER  }}
           password: ${{ secrets.SERVER_PASSWORD }}
           source: "deploy/docker-compose.yaml"
-          target: "test_app"
+          target: "skywars"
           strip_components: 1
       - name: run
         uses: appleboy/ssh-action@master
